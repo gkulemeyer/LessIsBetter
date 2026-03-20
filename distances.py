@@ -38,7 +38,8 @@ def main():
         raise SystemExit("[ERROR]: data must have 'structure' column") 
     
     dist = compute_distances(data)
-    dist.to_hdf(args.file_path.parent / f"{args.file_path.stem}_distances.h5", key='rnadist', mode='w')
+    args.save_path.mkdir(parents=True, exist_ok=True)
+    dist.to_hdf(args.save_path / f"{args.file_path.stem}_distances.h5", key='rnadist', mode='w')
 
 
 if __name__ == "__main__":

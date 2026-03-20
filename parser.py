@@ -1,22 +1,14 @@
 from pathlib import Path
 import argparse
 
-repo_path = Path("/home/gkulemeyer/Documents/DiskB/Guillermo/ImproveInterfam/subsampling/app")
-dist_path = repo_path / "data" / "ArchiveII_distances.h5"
-file_path = repo_path / "data" / "ArchiveII.csv"
-save_path = repo_path / "outputs"
+dist_path = Path("data") / "ArchiveII_distances.h5"
+file_path = Path("data") / "ArchiveII.csv"
+save_path = Path("outputs")
 
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         description="Parser for project paths"
-    )
-
-    parser.add_argument(
-        "--repo-path",
-        type=Path,
-        default=repo_path,
-        help="Path to the repository root"
     )
 
     parser.add_argument(
@@ -64,10 +56,10 @@ def parse_args():
 
     if args.file_path is None:
         print("[WARNING]: No --file-path provided, using default: data/ArchiveII.csv")
-        args.file_path = args.repo_path / "data" / "ArchiveII.csv"
+        args.file_path = "data" / "ArchiveII.csv"
 
     if args.save_path is None:
-        args.save_path = args.repo_path / "outputs"
+        args.save_path = "outputs"
 
     if args.max_sequences < 0:
         parser.error("--max-sequences must be >= 0")
