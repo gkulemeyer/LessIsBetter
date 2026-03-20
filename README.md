@@ -25,7 +25,7 @@ pip install -r requirements.txt
 - `id`: unique sequence identifier.
 - `fam`: RNA family label.
 
-In case the matrix computation is needed, is possible to use the script `distances.py`.
+In case the matrix computation is needed, is possible to use the script `distances.py`. For the ArchiveII dataset, it can be downloaded from [this link](https://drive.google.com/file/d/12larI6Glr1uxocJD8RoW3KXXrr0sMYKN/view?usp=drive_link).
 
 *Arguments*:
 - `--file-path`: path to the input CSV file. Default: `data/ArchiveII.csv`
