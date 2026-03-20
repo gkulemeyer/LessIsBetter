@@ -63,7 +63,7 @@ While, for a given dataset, `path/to/example.csv`, saving the result in `save/pa
 python3 main.py \ 
   --file-path path/to/example.csv \
   --save-path outputs \
-  --strategy save/path/ \
+  --strategy randS \
   --max-sequences 400
 ```
 
@@ -74,7 +74,7 @@ A minimal command using default configurations is:
 ```bash
 python3 main.py \
   --dist-path data/ArchiveII_distances.h5 \
-  -- strategy clusS
+  --strategy clusS
   --max-sequences 400
 ```
 While, for a given dataset, `path/to/example.csv` with matrix `path/to/distances.h5`, saving the result in `save/path/`, a command is:
@@ -84,7 +84,7 @@ python3 main.py \
   --file-path path/to/example.csv \
   --dist-path path/to/distances.h5 \
   --save-path save/path/ \
-  --strategy  randS \
+  --strategy  clusS \
   --max-sequences 100
 ```
   

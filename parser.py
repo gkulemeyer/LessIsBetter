@@ -56,10 +56,10 @@ def parse_args():
 
     if args.file_path is None:
         print("[WARNING]: No --file-path provided, using default: data/ArchiveII.csv")
-        args.file_path = "data" / "ArchiveII.csv"
+        args.file_path = Path("data") / "ArchiveII.csv"
 
     if args.save_path is None:
-        args.save_path = "outputs"
+        args.save_path = Path("outputs")
 
     if args.max_sequences < 0:
         parser.error("--max-sequences must be >= 0")
