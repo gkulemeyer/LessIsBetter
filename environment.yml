@@ -1,0 +1,9 @@
+name: less-is-better
+channels:
+  - defaults
+dependencies:
+  - h5py
+  - tqdm
+  - pandas
+  - scipy
+  - pytables

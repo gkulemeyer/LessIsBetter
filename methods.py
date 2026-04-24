@@ -112,7 +112,10 @@ def intra_distances(data: pd.DataFrame, distances: pd.DataFrame):
 
 def load_distances(path): 
     try:
-        distances = pd.read_hdf(path)
+        distances = pd.read_hdf(path)  
         return distances
     except Exception as e:
-        print(f"Error loading distances from {path}: {e}") 
+        raise RuntimeError(
+            f"Could not load distance matrix from {path}. "
+            "Make sure the file exists and PyTables is installed."
+        ) from e
