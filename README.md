@@ -76,149 +76,17 @@ python3 distances.py \
 
 and returns the output `data/ArchiveII_distances.h5`. If the `--save-path` is not explicitly provided, the parent directory of --file-path is used by default.
 
-**WARNING!** Computing the all-vs-all structural distance matrix may take a long time.
-
-<!-- ____________________________________________________________________ -->
+**WARNING!** Computing the all-vs-all structural distance matrix may take a long time. 
 
 
-<!-- ## Dataset subsampling 
-The `main.py` script loads the dataset as a CSV file with columns `id` and `fam`, and returns the desired subsampled dataset.
+# Reproducibility
 
-For example, to perfom a random subsampling (`randS`) on the ArchiveII dataset (default) with a upper limit of 100 elements per family, run:
+The folder notebooks/ contains the code required to reproduce the figures presented in the article.
 
-```bash
-python3 main.py --max-sequences 100
-```
-The output is formatted as the input file is saved on `outputs/ArchiveII_randS_100.csv`.
+- **Data distribution**: [Fig1A.ipynb](notebooks/Fig1A.ipynb) shows the family distribution in the dataset and the balance. 
 
-To perform a structural subsampling, for example `clusS`, for a given dataset and distance matrix a command is:
+- **Distance distributions**: the notebook [Fig1B.ipynb](notebooks/Fig1B.ipynb) contains the changes in the intra-family minimum structural distance produced by each subsampling strategy. [Fig1C-D.ipynb](notebooks/Fig1C-D.ipynb) presents the mean and minimum inter/intra family distances, and also the impact of the different strategies on the train-to-test distance matrices relative to the original ones. The intra-family distance matrix at a sequence level and the impact of subsampling is provided in the [Fig2.ipynb](notebooks/Fig2.ipynb).
 
+- **Impact on training**: For the different models trained, the [Fig3.ipynb](notebooks/Fig3.ipynb) presents the Train and validation losses per training epoch, and also the F1 score obtained with the validation set and with the family held-out for the different models, and datasets used to train the sincFold model.
 
-```bash
-python3 main.py \
- --file-path data/ArchiveII.csv \
- --dist-path outputs/ArchiveII_distances.h5 \
- --save-path outputs/ \
- --strategy  clusS \
- --max-sequences 100
-```
-
-The output is formatted as the input file is saved on `outputs/ArchiveII_clusS_100.csv`. -->
-<!-- 
-
-
-**main.py**: loads the input file as CSV, if the subsampling method selected is `sortS` or `clusS`, the script also expects the distance matrix as a HDF5 file. Then, it applies one subsampling strategy, and writes the subsampled dataset. Required CSV columns:
-
-
-- `id`: unique sequence identifier.
-- `fam`: RNA family label.
-
-
-In case the matrix computation is needed, is possible to use the script `distances.py`. 
-
-
-*Arguments*:
-- `--file-path`: path to the input CSV file. Default: `data/ArchiveII.csv`
-- `--dist-path`: path to the input distance matrix in HDF5 (`.h5`) format. Required for `sortS` and `clusS`. Default: `None`
-- `--save-path`: output directory. Default: `outputs`
-- `--strategy`: subsampling strategy. Must be one of `randS`, `clusS`, or `sortS`. Default: `randS`
-- `--max-sequences`: maximum number of sequences per family. Default: `100`
-
-
-**distances.py**: given an input CSV file, computes an all-vs-all structural distance matrix using `RNAdistance` and saves in HDF5 format.
-
-
-- `id`: unique sequence identifier.
-- `structure`: secondary structure string (dot bracket format).
-
-
-
-
-*Arguments*:
-- `--file-path`: path to the input CSV file. Default: `data/ArchiveII.csv`
-- `--save-path`: path to the output directory. If not explicitly provided, the parent directory of `--file-path` is used by default.
-
-
-**Note:**  `distances.py` calls the [`RNAdistance`](https://github.com/ViennaRNA/ViennaRNA) executable through `subprocess`. This tool must be available in your shell environment before computing structural distances.
-
-
-
-
-## Usage examples
-
-
-### Random subsampling (randS)
-A minimal command using default configurations is:
-
-
-```bash
-python3 main.py --max-sequences 400
-```
-
-
-While, for a given dataset, `path/to/example.csv`, saving the result in `save/path/`, a command is:
-
-
-```bash
-python3 main.py \
- --file-path path/to/example.csv \
- --save-path outputs \
- --strategy randS \
- --max-sequences 400
-```
-
-
-### Structural subsampling (sortS / clusS)
-
-
-A minimal command using default configurations is:
-
-
-```bash
-python3 main.py \
- --dist-path data/ArchiveII_distances.h5 \
- --strategy clusS
- --max-sequences 400
-```
-While, for a given dataset, `path/to/example.csv` with matrix `path/to/distances.h5`, saving the result in `save/path/`, a command is:
-
-
-```bash
-python3 main.py \
- --file-path path/to/example.csv \
- --dist-path path/to/distances.h5 \
- --save-path save/path/ \
- --strategy  clusS \
- --max-sequences 100
-```
- ### Outputs
-
-
-`main.py` creates the output directory if needed and saves the subsampled dataset as:
-<save-path>/<input_file>_<strategy>_<max_sequences>.csv
-
-
-```text
-```
-
-
-For example:
-
-
-```text
-outputs/ArchiveII_randS_100.csv
-outputs/ArchiveII_clusS_100.csv
-outputs/ArchiveII_sortS_100.csv
-```
-
-
-### Compute structural distances
-
-
-Structural distance computation requires
-
-
-```bash
-python3 distances.py --file-path data/ArchiveII.csv --save-path data
-```
-writes the output`data/ArchiveII_distances.h5` -->
+- **Impact on generalization**: [Fig4.ipynb](notebooks/Fig4.ipynb) a figure with the test  F1 scores obtained from each model/ strategy/ threshold per family is presented, and a heatmap comparing the performance of each strategy across models. Also, [this notebook](notebooks/Fig4_interactive.ipynb) allows a better comparison between the baseline models and each strategy employed.
