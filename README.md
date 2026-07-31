@@ -81,12 +81,12 @@ and returns the output `data/ArchiveII_distances.h5`. If the `--save-path` is no
 
 # Reproducibility
 
-The folder notebooks/ contains the code required to reproduce the figures presented in the article.
+The notebooks/ folder contains the code required to reproduce the figures presented in the article.
 
-- **Data distribution**: [Fig1A.ipynb](notebooks/Fig1A.ipynb) shows the family distribution in the dataset and the balance. 
+- **Data distribution**: [Figure 1A](notebooks/Fig1A.ipynb) shows the family distribution in the dataset and the balance. 
 
-- **Distance distributions**: the notebook [Fig1B.ipynb](notebooks/Fig1B.ipynb) contains the changes in the intra-family minimum structural distance produced by each subsampling strategy. [Fig1C-D.ipynb](notebooks/Fig1C-D.ipynb) presents the mean and minimum inter/intra family distances, and also the impact of the different strategies on the train-to-test distance matrices relative to the original ones. The intra-family distance matrix at a sequence level and the impact of subsampling is provided in the [Fig2.ipynb](notebooks/Fig2.ipynb).
+- **Distance distributions**: the notebook [Figure 1B](notebooks/Fig1B.ipynb) contains the changes in the intra-family minimum structural distance produced by each subsampling strategy. [Figures 1C and 1D](notebooks/Fig1C-D.ipynb) present the mean and minimum inter- and intra-family distances, and also the impact of the different strategies on the train-to-test distance matrices relative to the full dataset. The intra-family distance matrices at a sequence level and the impact of subsampling are presented in the [Figure 2](notebooks/Fig2.ipynb).
 
-- **Impact on training**: For the different models trained, the [Fig3.ipynb](notebooks/Fig3.ipynb) presents the Train and validation losses per training epoch, and also the F1 score obtained with the validation set and with the family held-out for the different models, and datasets used to train the sincFold model.
+- **Impact on training**: For the different models trained, the [Figure 3](notebooks/Fig3.ipynb) presents the training and validation losses per epoch, and also the F1 score obtained with the validation set and with the family held-out for the different models, and datasets used to train the sincFold model.
 
-- **Impact on generalization**: [Fig4.ipynb](notebooks/Fig4.ipynb) a figure with the test  F1 scores obtained from each model/ strategy/ threshold per family is presented, and a heatmap comparing the performance of each strategy across models. Also, [this notebook](notebooks/Fig4_interactive.ipynb) allows a better comparison between the baseline models and each strategy employed.
+- **Impact on generalization**: The test  F1 scores obtained from each model/ strategy/ threshold per family, and a heatmap comparing the performance of each strategy across models and the full dataset is presented in [Figure 4](notebooks/Fig4.ipynb) . Also, [this interactive notebook](https://colab.research.google.com/github/gkulemeyer/LessIsBetter/blob/main/notebooks/Fig4_interactive.ipynb) allows a better comparison between the baseline models and each strategy employed.
