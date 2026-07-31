@@ -44,7 +44,7 @@ The `main.py` script loads a dataset from a CSV file with the columns `id` and `
 
 If the subsampling method selected is `sortS` or `clusS`, the script also requires the structural distance matrix as a HDF5 file. 
 
-For example, to perfom structure-aware subsampling using `clusS` on the ArchiveII dataset (default) with a upper limit of 100 elements per family, run:
+For example, to perfom structure-aware subsampling using `clusS` on the ArchiveII dataset (default) with an upper limit of 100 elements per family, run:
 
 ```bash
 python3 main.py \ 
