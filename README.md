@@ -85,7 +85,7 @@ The notebooks/ folder contains the code required to reproduce the figures presen
 
 - **Data distribution**: [Figure 1A](notebooks/Fig1A.ipynb) shows the family distribution in the dataset and the balance. 
 
-- **Distance distributions**: the notebook [Figure 1B](notebooks/Fig1B.ipynb) contains the changes in the intra-family minimum structural distance produced by each subsampling strategy. [Figures 1C and 1D](notebooks/Fig1C-D.ipynb) present the mean and minimum inter- and intra-family distances, and also the impact of the different strategies on the train-to-test distance matrices relative to the full dataset. The intra-family distance matrices at a sequence level and the impact of subsampling are presented in the [Figure 2](notebooks/Fig2.ipynb).
+- **Distance distributions**: the notebook [Figure 1B](notebooks/Fig1B.ipynb) contains the changes in the intra-family minimum structural distance produced by each subsampling strategy. [Figures 1C and 1D](notebooks/Fig1C-D.ipynb) present the mean and minimum inter- and intra-family distances, and also the impact of the different strategies on the train-to-test distance matrices relative to the full dataset. The intra-family distance matrices at a sequence level and the impact of subsampling are presented in [Figure 2](notebooks/Fig2.ipynb).
 
 - **Impact on training**: For the different models trained, the [Figure 3](notebooks/Fig3.ipynb) presents the training and validation losses per epoch, and also the F1 score obtained with the validation set and with the family held-out for the different models, and datasets used to train the sincFold model.
 
