@@ -2,32 +2,49 @@ import subprocess
 import numpy as np
 import pandas as pd
 from tqdm import tqdm
+import RNA
 from parser import build_distance_parser
  
 
+
+def structure_to_tree(struc):
+    # RNAdistance cannot handle pseudoknots (treated as unpaired)
+    #  https://pubmed.ncbi.nlm.nih.gov/36077037/
+    struc = struc.translate(str.maketrans("<>{}", "...."))
+
+    tree_string = RNA.db_to_tree_string(
+        struc,
+        RNA.STRUCTURE_TREE_EXPANDED,
+    )
+    return RNA.make_tree(tree_string)
+
 def compute_distances(data):
     ids = data.index
-    distances = pd.DataFrame(np.zeros((len(ids), len(ids))))-1
-    distances.index, distances.columns = ids, ids 
 
-    for i,rowi in tqdm(data.iterrows(),total=len(data)):
-        for j,rowj in data.iterrows():
-            if distances.loc[j,i] < 0:
-                echo_line = rowi.structure + "\n" + rowj.structure
-                # RNAdistance cannot handle pseudoknots (treated as unpaired) https://pubmed.ncbi.nlm.nih.gov/36077037/
-                echo_line = echo_line.replace('<','.').replace('>','.').replace('{','.').replace('}','.')
-                oo = subprocess.check_output(["RNAdistance"], input=echo_line.encode('utf-8'))
+    trees = {
+        idx: structure_to_tree(row.structure)
+        for idx, row in data.iterrows()
+    }
 
-                if oo != b"":
-                    max_len = len(rowi.structure) if len(rowi.structure)>len(rowj.structure) else len(rowj.structure) 
-                    distances.loc[i,j] = float(oo[2:])/max_len
-                else:
-                    distances.loc[i,j] = np.nan
-                    print("Warning: RNAdistance error with {} and {}".format(i, j))
+    lengths = data["structure"].str.len().to_dict()
+
+    distances = pd.DataFrame( np.zeros((len(ids), len(ids))),index=ids,columns=ids) -1
+
+    for k, i in enumerate(tqdm(ids)):
+        distances.loc[i, i] = 0.
+        for j in ids[k + 1:]:
+            distance = RNA.tree_edit_distance(trees[i], trees[j])
+
+            if distance < 0:
+                value = np.nan
+                print(f"Warning: RNAdistance error with {i} and {j}")
             else:
-                distances.loc[i,j] = distances.loc[j,i]
-    return distances
+                value = distance / max(lengths[i], lengths[j])
 
+            distances.loc[i, j] = value
+            distances.loc[j, i] = value
+
+    return distances
 
 def main():
 
