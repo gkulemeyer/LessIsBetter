@@ -1,7 +1,13 @@
 name: less-is-better
+
 channels:
+  - conda-forge
+  - bioconda
   - defaults
+
 dependencies:
+  - python=3.12
+  - viennarna
   - h5py
   - tqdm
   - pandas
